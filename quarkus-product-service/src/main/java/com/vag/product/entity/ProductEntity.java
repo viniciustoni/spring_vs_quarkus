@@ -13,8 +13,8 @@ import java.time.ZonedDateTime;
 @RequiredArgsConstructor
 // DIFF: No diff :)
 @Entity
-@Table(name = "product")
-@SequenceGenerator(name = "seq_product", sequenceName = "seq_product")
+@Table(name = "product", schema = "quarkus")
+@SequenceGenerator(name = "seq_product", schema = "quarkus", sequenceName = "seq_product")
 public class ProductEntity {
 
     @Id
@@ -31,10 +31,10 @@ public class ProductEntity {
     private BigDecimal unitPrice;
 
     @CreationTimestamp
-    @Column(name = "created_at", insertable = true, updatable = false)
-    private ZonedDateTime createdAt;
+    @Column(name = "created_on", insertable = true, updatable = false)
+    private ZonedDateTime createdOn;
 
     @UpdateTimestamp
-    @Column(name = "updated_at", insertable = false, updatable = true)
-    private ZonedDateTime updatedAt;
+    @Column(name = "updated_on", insertable = false, updatable = true)
+    private ZonedDateTime updatedOn;
 }

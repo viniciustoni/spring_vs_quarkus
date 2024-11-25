@@ -1,10 +1,15 @@
 package com.vag.product.resources;
 
+import com.vag.product.domain.ProductService;
 import com.vag.product.dto.ProductDto;
-import com.vag.product.service.ProductService;
+import com.vag.product.dto.ProductSearchDto;
+import jakarta.validation.Valid;
+import jakarta.validation.groups.ConvertGroup;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Path("/api/product")
 @RequiredArgsConstructor
@@ -15,15 +20,14 @@ public class ProductResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    // TODO: add validation
-    public ProductDto saveProduct(ProductDto productDto) {
+    public ProductDto saveProduct(@Valid @ConvertGroup(to = ProductDto.InsertProductGroup.class) ProductDto productDto) {
         return productService.saveProduct(productDto);
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public ProductDto updateProduct(ProductDto productDto) {
+    public ProductDto updateProduct(@Valid @ConvertGroup(to = ProductDto.UpdateProductGroup.class) ProductDto productDto) {
         return productService.updateProduct(productDto);
     }
 
@@ -36,8 +40,9 @@ public class ProductResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String searchProducts(@QueryParam("name") String name, @QueryParam("brand") String brand) {
-        return "Hello from Quarkus REST";
+    // TODO: add relative one for spring
+    public List<ProductDto> searchProducts(@BeanParam ProductSearchDto productSearchDto) {
+        return productService.searchProductByFilter(productSearchDto);
     }
 
 }

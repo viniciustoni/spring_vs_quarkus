@@ -1,6 +1,7 @@
-package com.vag.product.service;
+package com.vag.product.domain;
 
 import com.vag.product.dto.ProductDto;
+import com.vag.product.dto.ProductSearchDto;
 import com.vag.product.entity.ProductEntity;
 import com.vag.product.exception.EntityNotFoundException;
 import com.vag.product.mapper.ProductMapper;
@@ -22,6 +23,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
+    @Transactional
     public ProductDto saveProduct(ProductDto productDto) {
 
         ProductEntity product = productMapper.toProduct(productDto);
@@ -49,8 +51,10 @@ public class ProductService {
                 .orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND_TEMPLATE_MESSAGE.formatted(id)));
     }
 
-    public List<ProductDto> searchProductByFilter(String name, String brand) {
-        // TODO: specification
-        return null;
+    public List<ProductDto> searchProductByFilter(ProductSearchDto productSearchDto) {
+        return productRepository.findByNameAndBrand(productSearchDto.getName(), productSearchDto.getBrand())
+                .stream()
+                .map(productMapper::toProductDto)
+                .toList();
     }
 }

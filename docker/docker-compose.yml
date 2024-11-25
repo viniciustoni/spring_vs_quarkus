@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  postgresdb:
+    image: "postgres"
+    restart: always
+    environment:
+      - POSTGRES_USER=meetup
+      - POSTGRES_PASSWORD=meetup
+      - POSTGRES_DB=meetup
+    ports:
+      - "54320:5432"
+    networks:
+      - database
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
+  #  pgadmin:
+  #    image: "dpage/pgadmin4:latest"
+  #    environment:
+  #      - PGADMIN_DEFAULT_EMAIL=user@domain.com
+  #      - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+  #    ports:
+  #      - "8282:80"
+  #    networks:
+  #      - database
+
+networks:
+  database:
+    driver: bridge
