@@ -11,12 +11,14 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "cdi")
 public interface ProductMapper {
 
+    @Mapping(target = "productStatus", constant = "ACTIVE")
     ProductEntity toProduct(ProductDto productDto);
 
     @InheritInverseConfiguration(name = "toProduct")
     ProductDto toProductDto(ProductEntity productEntity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "productStatus", constant = "ACTIVE")
     ProductEntity updateProduct(@MappingTarget ProductEntity productEntity, ProductDto productDto);
 
 }

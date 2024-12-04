@@ -1,15 +1,19 @@
 package com.vag.product.dto;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
 import java.math.BigDecimal;
 
 // DIFF: TODO: add the respective one for spring
+@Builder(toBuilder = true)
 @RegisterForReflection
 public record ProductDto(
         @Null(groups = InsertProductGroup.class, message = "Id must be null.")
-        @NotNull(groups = UpdateProductGroup.class, message = "Id must not be null.")
         Long id,
 
         @NotBlank
@@ -26,8 +30,4 @@ public record ProductDto(
 
     public interface InsertProductGroup {
     }
-
-    public interface UpdateProductGroup {
-    }
-
 }

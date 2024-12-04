@@ -1,9 +1,14 @@
 package com.vag.product.repository;
 
 import com.vag.product.entity.ProductEntity;
+import com.vag.product.repository.specification.Specification;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -25,7 +30,23 @@ public class ProductRepository implements PanacheRepository<ProductEntity> {
                 "FROM ProductEntity where name = :name and brand = :brand",
                 Parameters.with("name", name)
                         .and("brand", brand)
-                        .map()
-        ).list();
+                        .map())
+                .list();
+    }
+
+    public List<ProductEntity> findAll(Specification<ProductEntity> specification) {
+
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<ProductEntity> query = builder.createQuery(ProductEntity.class);
+
+        Root<ProductEntity> root = query.from(ProductEntity.class);
+        Predicate predicate = specification.toPredicate(root, query, builder);
+
+        query.select(root);
+        query.where(predicate);
+
+        return getEntityManager()
+                .createQuery(query)
+                .getResultList();
     }
 }

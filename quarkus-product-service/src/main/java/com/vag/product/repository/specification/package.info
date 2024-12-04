@@ -1,0 +1,2 @@
+Considering that quarkus doesn't have specification feature at the moment of this code. I would like to have an example of it, using CriteriaBuilder,
+as a starting point I checked how spring was doing it, and copy part of the code that I was in need to make it to work in a nice way.
