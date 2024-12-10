@@ -4,6 +4,7 @@ import com.vag.product.IntegrationTest;
 import com.vag.product.ProductPrototype;
 import com.vag.product.dto.ProductDto;
 import com.vag.product.repository.ProductRepository;
+import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 import java.math.BigDecimal;
@@ -25,9 +27,13 @@ class ProductResourceTest {
     @Autowired
     private ProductRepository productRepository;
 
+    @LocalServerPort
+    private int port;
+
     @BeforeEach
     @Transactional
     void beforeEach() {
+        RestAssured.port = port;
         productRepository.deleteAll();
     }
 

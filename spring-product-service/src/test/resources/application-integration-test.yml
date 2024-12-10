@@ -1,9 +1,5 @@
 spring:
   application:
     name: spring-product-service-integration-test
-  datasource:
-    url:
-    username:
-    password:
   main:
     allow-bean-definition-overriding: true
