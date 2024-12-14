@@ -19,6 +19,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// DIFF: We can use our tests like a bean and inject our dependencies via constructor
 @QuarkusTest
 @RequiredArgsConstructor
 class ProductResourceTest {

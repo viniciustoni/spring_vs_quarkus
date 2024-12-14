@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
+// DIFF: TestContainers on Quarkus are started automatically without any
+// configuration in case we dont have the jdbc.url configured. It's smart enough to know which DB we want to.
+// On Spring it requires some configuration
 @TestConfiguration(proxyBeanMethods = false)
 public class TestcontainersConfiguration {
 
