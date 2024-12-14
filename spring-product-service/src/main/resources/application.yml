@@ -1,3 +1,6 @@
+server:
+  port: 8181
+
 spring:
   application:
     name: spring-product-service
@@ -23,7 +26,7 @@ management:
 
 # App Info
 info:
-  spring-product-service:
+  product-service:
     application.name: "@project.artifactId@"
     build.version: "@project.version@"
     build.timestamp: "@maven.build.timestamp@"

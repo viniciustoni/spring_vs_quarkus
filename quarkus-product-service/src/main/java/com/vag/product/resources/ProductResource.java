@@ -12,12 +12,20 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+// DIFF: It'll use annotation from jakarta.ws.rs.*. On Spring we will use Spring annotations.
+// On Spring we usually we use *Controller on Quarkus we use *Resource
 @Path("/api/product")
 @RequiredArgsConstructor
 public class ProductResource {
 
     private final ProductService productService;
 
+
+    // DIFF: On spring it's cleaner than on Quarkus, in here we will need to add 3 annotations instead of only one.
+    // Also for Beans validation we will need to provide 2 annotation in case we want to validate using groups
+    // one for @Valid and one for the Group validation. For cases where we don't need group validation only
+    // one annotation is needed.
+    // But in other hands, we don't need to add @RequestBody for proper deserializable.
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -48,7 +56,8 @@ public class ProductResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    // TODO: add relative one for spring
+    // DIFF: If we want to use request param inside a class, we will need to annotate with @BeanParam.
+    // On spring we don't need any annotation
     public List<ProductDto> searchProducts(@BeanParam ProductSearchDto productSearchDto) {
 //        return productService.searchProductByFilter(productSearchDto);
         return productService.searchProductByFilterSpecification(productSearchDto);

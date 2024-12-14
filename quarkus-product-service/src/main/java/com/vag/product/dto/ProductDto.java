@@ -9,7 +9,9 @@ import lombok.Builder;
 
 import java.math.BigDecimal;
 
-// DIFF: TODO: add the respective one for spring
+// DIFF: @RegisterForReflection means that we are marking this class to be used with reflection on native image.
+// On spring we should use @RegisterReflectionForBinding(ProductDto.class), however we will need to provide all the classes that
+// we want to register for reflection.
 @Builder(toBuilder = true)
 @RegisterForReflection
 public record ProductDto(

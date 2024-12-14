@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// DIFF: It'll use annotation from org.springframework.web.bind.annotation.* On Quarkus we will use annotations from jakarta.ws.rs.*.
+// On Spring we usually we use *Controller on Quarkus we use *Resource
 @RestController
 @RequestMapping(value = "/api/product", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -20,6 +22,9 @@ public class ProductController {
 
     private final ProductService productService;
 
+    // DIFF: in only one line we can provide all the info, however we must add the @RequestBody for proper mapping on post.
+    // For beans validation we can handle it with only one single annotation @Validated and provide our group,
+    // on Quarkus we need to add a second annotation: @ConvertGroup(to = ProductDto.InsertProductGroup.class)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDto> saveProduct(@Validated(ProductDto.InsertProductGroup.class) @RequestBody ProductDto productDto) {
         var newProduct = productService.saveProduct(productDto);
@@ -38,7 +43,7 @@ public class ProductController {
     }
 
     @GetMapping
-    // TODO: add relative one for spring
+    // DIFF: For bean params, we dont need to add any annotation, spring handle for us automatically.
     public List<ProductDto> searchProducts(ProductSearchDto productSearchDto) {
 //        return productService.searchProductByFilter(productSearchDto);
         return productService.searchProductByFilterSpecification(productSearchDto);

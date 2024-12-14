@@ -1,6 +1,6 @@
 package com.vag.product.domain;
 
-import com.vag.product.properties.ApplicationProperties;
+import com.vag.product.properties.ProductServiceProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -17,17 +17,17 @@ import java.time.ZonedDateTime;
 public class SystemService {
 
     private final Clock clock;
-    private final ApplicationProperties applicationProperties;
+    private final ProductServiceProperties productServiceProperties;
 
-    @Value("${info.spring-product-service.build.version}")
-    String currentVersion;
+    @Value("${info.product-service.build.version}")
+    private final String currentVersion;
 
     public ZonedDateTime getTimestamp() {
         return ZonedDateTime.now(clock);
     }
 
-    public ApplicationProperties getApplicationProperties() {
-        return applicationProperties;
+    public ProductServiceProperties getProductServiceProperties() {
+        return productServiceProperties;
     }
 
     public String getCurrentVersion() {

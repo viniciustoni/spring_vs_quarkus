@@ -10,7 +10,9 @@ import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    @ServerExceptionMapper
+    // DIFF: ON spring we have: @ExceptionHandler(MethodArgumentNotValidException.class),
+    // notice that the method itself it's a bit more verbose since we are returning the Response.
+    @ServerExceptionMapper(value = EntityNotFoundException.class)
     public Response handleEntityNotFoundException(EntityNotFoundException exception) {
         log.error("Entity not found error: {}", exception.getMessage());
         return Response.status(Response.Status.NOT_FOUND)

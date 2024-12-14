@@ -30,7 +30,7 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public OpenAPI customOpenAPI(@Value("${info.spring-product-service.build.version}") String version) {
+    public OpenAPI customOpenAPI(@Value("${info.product-service.build.version}") String version) {
 
         var license = new License()
                 .name("MIT License")

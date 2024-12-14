@@ -1,7 +1,7 @@
 package com.vag.product.resources;
 
 import com.vag.product.domain.SystemService;
-import com.vag.product.properties.ApplicationProperties;
+import com.vag.product.properties.ProductServiceProperties;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,8 @@ public class SystemResource {
     private final SystemService systemService;
 
     @GET
-    public ApplicationProperties getApplicationProperties() {
-        return systemService.getApplicationProperties();
+    public ProductServiceProperties getApplicationProperties() {
+        return systemService.getProductServiceProperties();
     }
 
     @GET

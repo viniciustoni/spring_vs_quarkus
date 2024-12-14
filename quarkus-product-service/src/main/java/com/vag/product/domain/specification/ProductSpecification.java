@@ -5,6 +5,7 @@ import com.vag.product.entity.enumerated.ProductStatus;
 import com.vag.product.repository.specification.Specification;
 import lombok.experimental.UtilityClass;
 
+// DIFF: After creating the Specification base classes similar to Spring, we can create our specification classes similar to spring ones
 @UtilityClass
 public class ProductSpecification {
 
