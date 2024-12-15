@@ -53,6 +53,7 @@ covered and some quick guideline of how to check the comparison between both fra
 
 ### What is plan to be covered soon
 
+- Comparison details on README.MD or new *.MD file, at this moment it's only on the code and some info on ppt/pdf.
 - Kotlin - actually my idea is to converter this entire project to kotlin, it's only in java for initial meetup
   presentation
 - Native image on Spring
@@ -63,4 +64,3 @@ covered and some quick guideline of how to check the comparison between both fra
 - Benchmark/Performance test between then - there are a lot of articles about it on the internet and the difference
   between then are not that big, plus it can maybe change based on your needs, so to be honest with you, I'll spend time
   with other stuff than simple benchmark about ~1-2Mb less between then ;)
- 
